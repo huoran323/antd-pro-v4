@@ -1,5 +1,6 @@
 import React from 'react';
-import {ConnectProps} from "@/models/connect";
+import { ConnectProps } from '@/models/connect';
+import styles from './UserLayout.less';
 
 export interface UserLayoutProps extends ConnectProps {
 
@@ -19,11 +20,20 @@ const UserLayout: React.FunctionComponent<ConnectProps> = props => {
     },
   } = props;
   return (
-    <div>
-      {children}
-    </div>
-  )
-}
+    <div className={styles.container}>
+      <div className={styles.content}>
+        <div className={styles.top}>
+          <div className={styles.header}>
+            <span className={styles.title}>后台管理系统</span>
+          </div>
+          <div className={styles.desc}>不积跬步无以至千里</div>
+        </div>
+        {children}
+      </div>
 
-export default  UserLayout;
+    </div>
+  );
+};
+
+export default UserLayout;
 

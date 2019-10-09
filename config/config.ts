@@ -39,7 +39,7 @@ export default  {
         }
       ]
     }
-  ]
+  ],
 } as IConfig
 
 
