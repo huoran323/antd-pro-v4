@@ -1,12 +1,11 @@
-import React, {Component} from "react";
-import {Dispatch} from "redux"
-import {Form, Input, Icon} from "antd";
+import React, { Component } from 'react';
+import { Dispatch } from 'redux';
+import { Form, Input, Icon, Button } from 'antd';
 import { FormComponentProps } from 'antd/es/form';
-import styles from "./style.less"
+import styles from './style.less';
 
-interface LoginProps {
+interface LoginProps extends FormComponentProps {
   dispatch: Dispatch<any>;
-  form?: FormComponentProps['form'];
 }
 
 interface LoginState {
@@ -15,28 +14,61 @@ interface LoginState {
 
 class Login extends Component<LoginProps, LoginState> {
 
+  handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("submit");
+    const { form, dispatch } = this.props;
+    form.validateFields((err, values) => {
+      if (!err) {
+
+      }
+    });
+  };
+
   render() {
     const { form } = this.props;
-    console.log("form --", form);
+    const { getFieldDecorator } = form;
 
     return (
       <div className={styles.main}>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Item>
-            {/*{getFieldDecorator('username', {*/}
-              {/*rules: [{ required: true, message: 'Please input your username!' }],*/}
-            {/*})(*/}
-              {/*<Input*/}
-                {/*prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}*/}
-                {/*placeholder="Username"*/}
-              {/*/>,*/}
-            {/*)}*/}
+            {
+              getFieldDecorator('username', {
+                rules: [
+                  {
+                    required: true,
+                    message: '请填写用户名',
+                  },
+                ],
+              })(
+                <Input size="large" placeholder="请填写用户名"/>,
+              )
+            }
+          </Form.Item>
+          <Form.Item>
+            {
+              getFieldDecorator('password', {
+                rules: [
+                  {
+                    required: true,
+                    message: '请填写密码',
+                  },
+                ],
+              })(
+                <Input size="large" placeholder="请填写密码"/>,
+              )
+            }
+          </Form.Item>
+          <Form.Item>
+            <Button size="large" type="primary" className={styles.submit} htmlType="submit">
+              登 录
+            </Button>
           </Form.Item>
         </Form>
-        我是登录页面
       </div>
-    )
+    );
   }
 }
 
-export default Login;
+export default Form.create<LoginProps>()(Login);
