@@ -1,47 +1,56 @@
 import { IConfig, IPlugin } from 'umi-types';
 
 const plugins: IPlugin[] = [
-  ['umi-plugin-react', {
-    antd: true,
-    dva: true,
-    dynamicImport: { webpackChunkName: true },
-    title: 'antd-pro-v4',
-    dll: true,
-    locale: {
-      enable: true,
-      default: 'zh-CN',
+  [
+    'umi-plugin-react',
+    {
+      antd: true,
+      dva: true,
+      dynamicImport: { webpackChunkName: true },
+      title: 'antd-pro-v4',
+      dll: true,
+      locale: {
+        enable: true,
+        default: 'zh-CN',
+      },
     },
-  }],
+  ],
 ];
 
-export default  {
+export default {
   plugins,
   hash: true,
   routes: [
     {
-      path: "/",
-      component: "../layouts/BlankLayout",
+      path: '/',
+      component: '../layouts/BlankLayout',
       routes: [
         {
-          path: "/user",
-          component: "../layouts/UserLayout",
+          path: '/user',
+          component: '../layouts/UserLayout',
           routes: [
             {
-              path: "/user",
-              redirect: "/user/login"
+              path: '/user',
+              redirect: '/user/login',
             },
             {
-              name: "login",
-              path: "/user/login",
-              component: "./user/login"
-            }
-          ]
-        }
-      ]
-    }
+              name: 'login',
+              path: '/user/login',
+              component: './user/login',
+            },
+          ],
+        },
+      ],
+    },
   ],
-} as IConfig
-
+  proxy: {
+    '/api': {
+      target: 'http://139.159.248.18:80/api',
+      changeOrigin: true,
+      pathRewrite: { '': '' },
+    },
+  },
+} as IConfig;
 
 // ref: https://umijs.org/config/
 // const config: IConfig = {
