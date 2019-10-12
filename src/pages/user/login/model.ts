@@ -4,7 +4,7 @@ import { EffectsCommandMap } from 'dva';
 import { loginRequest } from './service';
 
 export interface StateType {
-  // token?: string;
+  token?: string;
 }
 
 export type Effect = (
@@ -42,7 +42,7 @@ const Model: ModelType = {
     saveInfo(state, { payload }) {
       return {
         ...state,
-        // token: payload.token,
+        token: payload.token,
       };
     },
   },

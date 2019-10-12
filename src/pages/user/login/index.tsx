@@ -9,28 +9,28 @@ import styles from './style.less';
 interface LoginProps extends FormComponentProps {
   dispatch: Dispatch<any>;
   userLogin: StateType;
-  submitting: boolean;
 }
 
-interface LoginState {}
+// interface LoginState {}
 
 export interface FormDataType {
   username: string;
   password: string;
 }
 
-@connect(({ userLogin }: { userLogin: StateType }) => ({
+const mapStateToProps = ({ userLogin }: { userLogin: StateType }) => ({
   userLogin,
-}))
-class Login extends Component<LoginProps, LoginState> {
-  state: LoginState = {};
+});
+
+@connect(mapStateToProps)
+class Login extends Component<LoginProps, any> {
+  // state: LoginState = {};
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const { form, dispatch } = this.props;
     form.validateFields((err, values) => {
       if (!err) {
-        console.log('登录');
         console.log('values --', values);
         dispatch({
           type: 'userLogin/login',
