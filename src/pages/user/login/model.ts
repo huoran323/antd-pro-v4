@@ -1,10 +1,9 @@
 import { AnyAction, Reducer } from 'redux';
 import { EffectsCommandMap } from 'dva';
-
 import { loginRequest } from './service';
 
 export interface StateType {
-  token?: string;
+  token: string;
 }
 
 export type Effect = (
@@ -26,11 +25,12 @@ export interface ModelType {
 const Model: ModelType = {
   namepace: 'userLogin',
   state: {
-    token: undefined,
+    token: '',
   },
   effects: {
     *login({ payload }, { call, put }) {
       console.log('请求');
+      debugger;
       const response = yield call(loginRequest, payload);
       yield put({
         type: 'saveInfo',

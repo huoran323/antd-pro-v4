@@ -5,7 +5,10 @@ const plugins: IPlugin[] = [
     'umi-plugin-react',
     {
       antd: true,
-      dva: true,
+      dva: {
+        hmr: true,
+        immer: true,
+      },
       dynamicImport: { webpackChunkName: true },
       title: 'antd-pro-v4',
       dll: true,
