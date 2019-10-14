@@ -16,6 +16,15 @@ const plugins: IPlugin[] = [
         enable: true,
         default: 'zh-CN',
       },
+      routes: {
+        exclude: [
+          /models\//,
+          /services\//,
+          /model\.(t|j)sx?$/,
+          /service\.(t|j)sx?$/,
+          /components\//,
+        ],
+      },
     },
   ],
 ];

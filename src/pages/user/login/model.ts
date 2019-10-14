@@ -12,7 +12,7 @@ export type Effect = (
 ) => void;
 
 export interface ModelType {
-  namepace: string;
+  namespace: string;
   state: StateType;
   effects: {
     login: Effect;
@@ -23,14 +23,12 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namepace: 'userLogin',
+  namespace: 'userLogin',
   state: {
     token: '',
   },
   effects: {
     *login({ payload }, { call, put }) {
-      console.log('请求');
-      debugger;
       const response = yield call(loginRequest, payload);
       yield put({
         type: 'saveInfo',
