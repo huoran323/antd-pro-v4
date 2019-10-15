@@ -52,6 +52,17 @@ const config: IConfig = {
             },
           ],
         },
+        {
+          path: '/',
+          component: '../layouts/BasicLayout',
+          routes: [
+            {
+              name: 'analysis',
+              path: '/dashboard/analysis',
+              component: './dashboard/analysis',
+            },
+          ],
+        },
       ],
     },
   ],

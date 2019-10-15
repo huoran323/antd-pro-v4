@@ -53,7 +53,7 @@ const request = extend({
 // request拦截器, 改变url 或 options.
 request.interceptors.request.use((url: string, options: any) => {
   let c_token = localStorage.getItem('Access-Token');
-  console.log('options --', options);
+
   if (c_token) {
     const headers = {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -73,7 +73,6 @@ request.interceptors.request.use((url: string, options: any) => {
 
 // response拦截器, 处理response
 request.interceptors.response.use((response, options) => {
-  console.log('response --', response);
   let token = response.headers.get('Access-Token');
   if (token) {
     localStorage.setItem('Access-Token', token);

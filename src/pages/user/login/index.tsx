@@ -32,7 +32,6 @@ class Login extends Component<LoginProps, any> {
     const { form, dispatch } = this.props;
     form.validateFields((err, values) => {
       if (!err) {
-        console.log('values --', values);
         dispatch({
           type: 'userLogin/login',
           payload: {
