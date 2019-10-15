@@ -36,7 +36,8 @@ class Login extends Component<LoginProps, any> {
         dispatch({
           type: 'userLogin/login',
           payload: {
-            ...values,
+            username: values.username,
+            password: values.password,
           },
         });
       }

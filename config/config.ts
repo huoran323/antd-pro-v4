@@ -10,7 +10,7 @@ const plugins: IPlugin[] = [
         immer: true,
       },
       dynamicImport: { webpackChunkName: true },
-      title: 'antd-pro-v4',
+      title: '后台管理系统',
       dll: true,
       locale: {
         enable: true,
@@ -29,7 +29,7 @@ const plugins: IPlugin[] = [
   ],
 ];
 
-export default {
+const config: IConfig = {
   plugins,
   hash: true,
   routes: [
@@ -57,12 +57,14 @@ export default {
   ],
   proxy: {
     '/api': {
-      target: 'http://139.159.248.18:80/api',
+      target: 'http://139.159.248.18:80',
+      // target: 'http://localhost:5000',
       changeOrigin: true,
       pathRewrite: { '': '' },
     },
   },
-} as IConfig;
+};
+export default config;
 
 // ref: https://umijs.org/config/
 // const config: IConfig = {

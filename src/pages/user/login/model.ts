@@ -29,6 +29,8 @@ const Model: ModelType = {
   },
   effects: {
     *login({ payload }, { call, put }) {
+      console.log('payload --', payload);
+
       const response = yield call(loginRequest, payload);
       yield put({
         type: 'saveInfo',
