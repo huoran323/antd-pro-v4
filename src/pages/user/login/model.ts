@@ -1,6 +1,8 @@
 import { AnyAction, Reducer } from 'redux';
 import { EffectsCommandMap } from 'dva';
 import { loginRequest } from './service';
+import { getRedirect } from '@/utils';
+import { routerRedux } from 'dva/router';
 
 export interface StateType {
   token: string;
@@ -30,11 +32,10 @@ const Model: ModelType = {
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(loginRequest, payload);
-
-      yield put({
-        type: 'saveInfo',
-        payload: response,
-      });
+      if (response) {
+        const redirect = getRedirect();
+        yield put(routerRedux.replace(redirect));
+      }
     },
   },
   reducers: {
