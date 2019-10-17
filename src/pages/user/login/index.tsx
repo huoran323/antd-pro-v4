@@ -11,8 +11,6 @@ interface LoginProps extends FormComponentProps {
   userLogin: StateType;
 }
 
-interface LoginState {}
-
 export interface FormDataType {
   username: string;
   password: string;
@@ -22,10 +20,7 @@ export interface FormDataType {
   userLogin,
 }))
 class Login extends Component<LoginProps, any> {
-  // state: LoginState = {};
-  componentDidMount() {
-    console.log('user --', this.props);
-  }
+  componentDidMount() {}
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 

@@ -1,6 +1,7 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
 import Qs from 'qs';
+import { async } from 'q';
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
@@ -72,11 +73,17 @@ request.interceptors.request.use((url: string, options: any) => {
 });
 
 // response拦截器, 处理response
-request.interceptors.response.use((response, options) => {
-  let token = response.headers.get('Access-Token');
+request.interceptors.response.use(async (response, options) => {
+  const res = await response.clone().json();
+  const { token, code, data } = res;
   if (token) {
     localStorage.setItem('Access-Token', token);
   }
+  if (code === 200) {
+    // 请求成功
+    return data;
+  }
+
   return response;
 });
 

@@ -1,17 +1,18 @@
-import React, { useEffect } from 'react';
+import React, { PureComponent } from 'react';
 import { Dispatch } from 'redux';
 import { connect } from 'dva';
+import { ConnectProps } from '@/models/connect';
 
-export interface BasicLayoutProps {
-  //   breadcrumbNameMap: {
-  //     [path: string]: MenuDataItem;
-  //   };
-  //   settings: Settings;
-  dispatch: Dispatch;
+export interface BasicLayoutProps extends ConnectProps {
+  menuList: any[];
+  collapsed?: boolean;
+  breadcrumbNameMap: any[];
 }
 
-const BasicLayout: React.FC<BasicLayoutProps> = props => {
-  return <div>基础</div>;
-};
+class BasicLayout extends PureComponent<BasicLayoutProps> {
+  render() {
+    return <div></div>;
+  }
+}
 
 export default connect()(BasicLayout);
