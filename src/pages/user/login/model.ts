@@ -31,10 +31,12 @@ const Model: ModelType = {
     *login({ payload }, { call, put }) {
       const response = yield call(loginRequest, payload);
       const { username } = response;
+      // 获取用户信息
       const userInfo = yield call(getUserInfo, { username: username });
 
       const { user_type } = userInfo;
 
+      // 获取菜单路由
       yield put({
         type: 'global/getMenu',
         payload: {

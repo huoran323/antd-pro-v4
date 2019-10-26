@@ -23,6 +23,7 @@ export interface GlobalModel {
   };
   reducers: {
     changeCollapsed: Reducer<any>;
+    updateState: Reducer<any>;
   };
 }
 
@@ -35,17 +36,24 @@ const Model: GlobalModel = {
   },
   effects: {
     *getMenu({ payload }, { call, put }) {
-      const response = yield call(getUserInfo, payload);
+      const menuList = yield call(getUserInfo, payload);
 
-      if (response) {
-        const redirect = getRedirect();
-        yield put(routerRedux.replace(redirect));
-      }
+      yield put({
+        type: 'updateState',
+        payload: {
+          menuList,
+          // breadcrumbNameMap,
+        },
+      });
+      yield put(routerRedux.push({ pathname: '/' }));
     },
   },
   reducers: {
     changeCollapsed(state, { collapsed }) {
       return { ...state, collapsed };
+    },
+    updateState(state, { payload }) {
+      return { ...state, ...payload };
     },
   },
 };
