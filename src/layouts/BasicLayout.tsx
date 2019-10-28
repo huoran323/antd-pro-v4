@@ -3,6 +3,8 @@ import { Dispatch } from 'redux';
 import { connect } from 'dva';
 import { ConnectProps } from '@/models/connect';
 import { GlobalModelState } from '@/models/global';
+import { Layout, BackTop } from 'antd';
+import { SiderMenu } from '@/widget';
 
 export interface BasicLayoutProps extends ConnectProps {
   menuList: any[];
@@ -18,7 +20,14 @@ class BasicLayout extends PureComponent<BasicLayoutProps> {
     console.log('props --', this.props);
   }
   render() {
-    return <div>测试</div>;
+    const { menuList } = this.props;
+    return (
+      <>
+        <Layout>
+          <SiderMenu menuList={menuList} />
+        </Layout>
+      </>
+    );
   }
 }
 
