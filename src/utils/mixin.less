@@ -1,0 +1,141 @@
+@import '~antd/lib/style/themes/default.less';
+
+@text-pc: #333;
+@text-rc: #666;
+@text-sc: #999;
+@text-hc: #c0c4cc;
+
+@color-white: #fff;
+@color-black: #000;
+@color-main: #f5f7f9; // 页面背景颜色
+@color-red: #e03d3e; // 主体红色
+@color-green: #0aa908;
+@color-menu: #191a23; // 菜单颜色
+@color-mute: #f0f0f0;
+
+@border-color-base: #eaeaea;
+@border-color-main: #e8e8e8;
+
+@shadow-1: 4px 4px 20px 0 rgba(0, 0, 0, 0.01);
+@transition-ease-in: all 0.3s ease-in;
+@transition-ease-out: all 0.3s ease-out;
+
+@card-margin-top: 10px;
+
+.background-hover {
+  transition: @transition-ease-in;
+}
+
+.text-gradient {
+  background-image: -webkit-gradient(
+    linear,
+    37.219838% 34.532506%,
+    36.425669% 93.178216%,
+    from(#29cdff),
+    to(#0a60ff),
+    color-stop(0.37, #148eff)
+  );
+  -webkit-text-fill-color: transparent;
+}
+
+.text-overflow {
+  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.textOverflowMulti(@line: 3, @bg: #fff) {
+  position: relative;
+  line-height: @font-size-base;
+  max-height: @line * 1.5 * @font-size-base;
+  text-align: justify;
+  margin-right: -1 * @font-size-base;
+  padding-right: @font-size-base;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    right: 14px;
+    margin-top: 0.2 * @font-size-base;
+    width: @font-size-base;
+    height: @font-size-base;
+    background-color: @bg;
+  }
+
+  &::after {
+    content: '...';
+    padding: 0 1px;
+    position: absolute;
+    right: @font-size-base;
+    bottom: 0;
+    background-color: @bg;
+  }
+}
+
+// mixins for clearfix
+// ---------------------------
+.clearfix() {
+  zoom: 1;
+  &::before,
+  &::after {
+    content: ' ';
+    display: table;
+  }
+
+  &::after {
+    clear: both;
+    visibility: hidden;
+    font-size: 0;
+    height: 0;
+  }
+}
+
+// 公共 flex 布局
+// --------------------
+.flex {
+  display: flex;
+}
+.row {
+  &:extend(.flex);
+  align-items: center;
+}
+.row-reverse {
+  &:extend(.row);
+  flex-direction: row-reverse;
+}
+.row-center {
+  &:extend(.row);
+  justify-content: center;
+}
+.row-between {
+  &:extend(.row);
+  justify-content: space-between;
+}
+.row-around {
+  &:extend(.row);
+  justify-content: space-around;
+}
+.row-end {
+  &:extend(.row);
+  justify-content: flex-end;
+}
+
+.column {
+  &:extend(.flex);
+  flex-direction: column;
+  justify-content: center;
+}
+.column-reverse {
+  &:extend(.column);
+  flex-direction: column-reverse;
+}
+.column-center {
+  &:extend(.column);
+  align-items: center;
+}
+.column-end {
+  &:extend(.column);
+  align-items: flex-end;
+}

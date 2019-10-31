@@ -20,11 +20,11 @@ class BasicLayout extends PureComponent<BasicLayoutProps> {
     console.log('props --', this.props);
   }
   render() {
-    const { menuList } = this.props;
+    const { location, menuList } = this.props;
     return (
       <>
         <Layout>
-          <SiderMenu menuList={menuList} />
+          <SiderMenu menuList={menuList} location={location} />
         </Layout>
       </>
     );
