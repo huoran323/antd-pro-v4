@@ -4,7 +4,7 @@ import { connect } from 'dva';
 import { ConnectProps } from '@/models/connect';
 import { GlobalModelState } from '@/models/global';
 import { Layout, BackTop } from 'antd';
-import { SiderMenu } from '@/widget';
+import { SiderMenu, GlobalHeader } from '@/widget';
 
 export interface BasicLayoutProps extends ConnectProps {
   menuList: any[];
@@ -17,7 +17,7 @@ export interface BasicLayoutProps extends ConnectProps {
 }))
 class BasicLayout extends PureComponent<BasicLayoutProps> {
   componentDidMount() {
-    console.log('props --', this.props);
+    
   }
   render() {
     const { location, menuList } = this.props;
@@ -25,6 +25,9 @@ class BasicLayout extends PureComponent<BasicLayoutProps> {
       <>
         <Layout>
           <SiderMenu menuList={menuList} location={location} />
+          <Layout>
+            <GlobalHeader></GlobalHeader>
+          </Layout>
         </Layout>
       </>
     );
