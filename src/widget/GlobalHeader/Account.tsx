@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'dva';
-import { Menu, Icon, Avatar, Spin } from 'antd';
+import { Menu, Icon, Avatar } from 'antd';
 import { ConnectProps } from '@/models/connect';
 import HeaderDropdown from './components/HeaderDropdown';
 
@@ -13,14 +13,20 @@ export interface IAccountProps extends ConnectProps {
 const Account: React.FC<IAccountProps> = props => {
   const { dispatch } = props;
 
+  const onMenuClick = ({ key }) => {
+    if (key === 'logout') {
+      dispatch({ type: 'global/logout' });
+    }
+  };
+
   const menu = (
-    <Menu className={styles.menu}>
+    <Menu className={styles.menu} onClick={onMenuClick}>
       <Menu.Item key="userInfo">
         <Icon type="setting" />
         个人中心
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="layout">
+      <Menu.Item key="logout">
         <Icon type="logout" />
         退出登录
       </Menu.Item>
@@ -37,4 +43,4 @@ const Account: React.FC<IAccountProps> = props => {
   );
 };
 
-export default Account;
+export default connect()(Account);

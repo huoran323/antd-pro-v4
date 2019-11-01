@@ -20,6 +20,7 @@ export interface GlobalModel {
   state: GlobalModelState;
   effects: {
     getMenu: Effect;
+    logout: Effect;
   };
   reducers: {
     changeCollapsed: Reducer<any>;
@@ -46,6 +47,9 @@ const Model: GlobalModel = {
         },
       });
       yield put(routerRedux.push({ pathname: '/' }));
+    },
+    *logout(_, { put }) {
+      yield put(routerRedux.push({ pathname: '/user/login' }));
     },
   },
   reducers: {
