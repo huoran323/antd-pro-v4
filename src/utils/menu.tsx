@@ -19,3 +19,10 @@ export const getIcon = (icon, className?) => {
   }
   return icon;
 };
+
+/**
+ * 合并路由配置
+ */
+export const mergeMenuList = menuList => {
+  console.log('menu --', menuList);
+};

@@ -10,7 +10,7 @@ interface IGlobalProps extends ConnectProps {}
 export default class GlobalHeader extends PureComponent<IGlobalProps> {
   render() {
     return (
-      <div className={classNames(styles.header, styles.dark)}>
+      <div className={classNames(styles.header)}>
         <div className={styles.content}>
           <Account></Account>
         </div>

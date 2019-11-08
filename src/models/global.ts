@@ -2,7 +2,8 @@ import { Reducer, AnyAction } from 'redux';
 import { EffectsCommandMap } from 'dva';
 import { routerRedux } from 'dva/router';
 import { getRedirect } from '@/utils';
-import { getUserInfo } from '@/services/global';
+import { mergeMenuList } from '@/utils/menu';
+import { fetchMenus } from '@/services/global';
 
 export interface GlobalModelState {
   collapsed: boolean;
@@ -36,8 +37,11 @@ const Model: GlobalModel = {
     breadcrumbNameMap: [],
   },
   effects: {
+    // 获取当前用户及菜单数据
     *getMenu({ payload }, { call, put }) {
-      const menuList = yield call(getUserInfo, payload);
+      const data = yield call(fetchMenus, payload);
+
+      const menuList = mergeMenuList(data);
 
       yield put({
         type: 'updateState',

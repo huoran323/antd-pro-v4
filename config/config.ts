@@ -68,8 +68,8 @@ const config: IConfig = {
   ],
   proxy: {
     '/api': {
-      target: 'http://139.159.248.18:80',
-      // target: 'http://localhost:5000',
+      // target: 'http://139.159.248.18:80',
+      target: 'http://localhost:5000',
       changeOrigin: true,
       pathRewrite: { '': '' },
     },
