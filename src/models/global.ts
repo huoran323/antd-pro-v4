@@ -50,7 +50,11 @@ const Model: GlobalModel = {
           // breadcrumbNameMap,
         },
       });
-      yield put(routerRedux.push({ pathname: '/' }));
+      const params = new URL(window.location.href);
+      console.log('params --', params);
+      let redirect = params.pathname;
+      // yield put(routerRedux.push({ pathname: '/' }));
+      yield put(routerRedux.replace(redirect || '/'));
     },
     *logout(_, { put }) {
       yield put(routerRedux.push({ pathname: '/user/login' }));

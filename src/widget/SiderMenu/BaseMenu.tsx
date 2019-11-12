@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Menu } from 'antd';
 import Link from 'umi/link';
-import { getIcon } from '@/utils/menu';
+import { getIcon, getMenuMatches, urlToList } from '@/utils/menu';
 const { SubMenu } = Menu;
 
 export default class BaseMenu extends PureComponent<any> {
@@ -13,7 +13,7 @@ export default class BaseMenu extends PureComponent<any> {
       return [];
     }
     return menuList
-      .filter(item => item.menu_name && !item.hideInMenu)
+      .filter(item => item.name && !item.hideInMenu)
       .map(item => this.getSubMenuOrItem(item));
   };
 
@@ -27,36 +27,36 @@ export default class BaseMenu extends PureComponent<any> {
             如果有一个元素满足条件，则表达式返回true , 剩余的元素不会再执行检测。
             如果没有满足条件的元素，则返回false。
        */
-    if (item.childList && item.childList.some(child => child.menu_name)) {
+    if (item.children && item.children.some(child => child.name)) {
       //遍历是否是SubMenu
-      const { menu_name } = item;
+      const { name } = item;
       return (
         <SubMenu
           title={
             item.icon ? (
               <span>
                 {getIcon(item.icon)}
-                <span>{menu_name}</span>
+                <span>{name}</span>
               </span>
             ) : (
-              menu_name
+              name
             )
           }
-          key="item.id"
+          key="item.path"
         >
-          {this.getNavMenuItems(item.childList)}
+          {this.getNavMenuItems(item.children)}
         </SubMenu>
       );
     }
     // 以下是MenuItem
-    return <Menu.Item key={item.id}>{this.getMenuItemPath(item)}</Menu.Item>;
+    return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
   };
 
   /**
    * 判断是否是http链接.返回 Link 或 a
    */
   getMenuItemPath = item => {
-    const { menu_name } = item;
+    const { name } = item;
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
     const { target } = item;
@@ -65,7 +65,7 @@ export default class BaseMenu extends PureComponent<any> {
       return (
         <a href={itemPath} target={target}>
           {icon}
-          <span>{menu_name}</span>
+          <span>{name}</span>
         </a>
       );
     }
@@ -74,7 +74,7 @@ export default class BaseMenu extends PureComponent<any> {
     return (
       <Link to={itemPath} target={target} replace={itemPath === location.pathname}>
         {icon}
-        <span>{menu_name}</span>
+        <span>{name}</span>
       </Link>
     );
   };
@@ -87,10 +87,28 @@ export default class BaseMenu extends PureComponent<any> {
     return `/${path || ''}`.replace(/\/+/g, '/');
   };
 
+  // 获取当前选中的菜单
+  getSelectedMenuKeys = pathname => {
+    const { flatMenuKeys } = this.props;
+    return urlToList(pathname).map(itemPath => getMenuMatches(flatMenuKeys, itemPath).pop());
+  };
+
   render() {
-    const { menuList } = this.props;
+    const {
+      menuList,
+      openKeys,
+      location: { pathname },
+    } = this.props;
+    let selectedKeys = this.getSelectedMenuKeys(pathname).filter(i => i);
+    if (!selectedKeys.length) {
+      if (openKeys && openKeys.length) {
+        selectedKeys = [openKeys[openKeys.length - 1]];
+      } else {
+        selectedKeys = ['/'];
+      }
+    }
     return (
-      <Menu theme="dark" mode="inline">
+      <Menu theme="dark" mode="inline" selectedKeys={selectedKeys}>
         {this.getNavMenuItems(menuList)}
       </Menu>
     );

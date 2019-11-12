@@ -16,9 +16,15 @@ export interface BasicLayoutProps extends ConnectProps {
   ...global,
 }))
 class BasicLayout extends PureComponent<BasicLayoutProps> {
-  componentDidMount() {}
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'global/getMenu',
+    });
+  }
   render() {
     const { location, menuList } = this.props;
+
     return (
       <>
         <Layout style={{ minHeight: '100vh', paddingLeft: '256px' }}>

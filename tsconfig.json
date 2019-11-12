@@ -55,7 +55,7 @@
   },
   "include": [
     "./src", // 默认是.ts,.tsx 当包含allowJs时也包括.js .jsx
-    "./config/*.ts",
+
     "./typings.d.ts"
   ],
   "exclude": [

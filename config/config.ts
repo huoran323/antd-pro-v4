@@ -1,4 +1,5 @@
 import { IConfig, IPlugin } from 'umi-types';
+import { routerList } from './routerConfig';
 
 const plugins: IPlugin[] = [
   [
@@ -32,40 +33,7 @@ const plugins: IPlugin[] = [
 const config: IConfig = {
   plugins,
   hash: true,
-  routes: [
-    {
-      path: '/',
-      component: '../layouts/BlankLayout',
-      routes: [
-        {
-          path: '/user',
-          component: '../layouts/UserLayout',
-          routes: [
-            {
-              path: '/user',
-              redirect: '/user/login',
-            },
-            {
-              name: 'login',
-              path: '/user/login',
-              component: './user/login',
-            },
-          ],
-        },
-        {
-          path: '/',
-          component: '../layouts/BasicLayout',
-          routes: [
-            {
-              name: 'analysis',
-              path: '/dashboard/analysis',
-              component: './dashboard/analysis',
-            },
-          ],
-        },
-      ],
-    },
-  ],
+  routes: routerList,
   proxy: {
     '/api': {
       // target: 'http://139.159.248.18:80',
