@@ -12,16 +12,16 @@ export interface ISiderMenu extends ConnectProps {
 }
 
 class SiderMenuWrapper extends PureComponent<ISiderMenu> {
-  static getDerivedStateFromProps(props, state) {
-    const { pathname } = state;
-    if (props.location.pathname !== pathname) {
-      return {
-        pathname: props.location.pathname,
-        openKeys: getDefaultCollapsedSubMenus(props),
-      };
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(props, state) {
+  //   const { pathname } = state;
+  //   if (props.location.pathname !== pathname) {
+  //     return {
+  //       pathname: props.location.pathname,
+  //       openKeys: getDefaultCollapsedSubMenus(props),
+  //     };
+  //   }
+  //   return null;
+  // }
 
   state = {
     openKeys: getDefaultCollapsedSubMenus(this.props),
@@ -37,8 +37,8 @@ class SiderMenuWrapper extends PureComponent<ISiderMenu> {
     });
   };
 
+  // onOpenChange	SubMenu 展开/关闭的回调	function(openKeys: string[]) openKeys是默认的参数，不需要手动传输
   handleOpenChange = openKeys => {
-    console.log('openKeys ====', openKeys);
     const moreThanOne = openKeys.filter(openKey => this.isMainMenu(openKey)).length > 1;
     this.setState({ openKeys: moreThanOne ? [openKeys.pop()] : [...openKeys] });
   };
@@ -50,6 +50,10 @@ class SiderMenuWrapper extends PureComponent<ISiderMenu> {
     const defaultProps = { openKeys };
     return (
       <Sider trigger={null} collapsible width={256} className={styles.sider}>
+        <div className={styles.logo}>
+          <img></img>
+          <h1></h1>
+        </div>
         <BaseMenu
           {...this.props}
           flatMenuKeys={flatMenuKeys}

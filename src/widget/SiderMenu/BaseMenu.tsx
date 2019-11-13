@@ -91,6 +91,7 @@ export default class BaseMenu extends PureComponent<any> {
   // 获取当前选中的菜单
   getSelectedMenuKeys = pathname => {
     const { flatMenuKeys } = this.props;
+    //pop() 方法将删除 arrayObject 的最后一个元素，把数组长度减 1，并且返回它删除的元素的值。如果数组已经为空，则 pop() 不改变数组，并返回 undefined 值。
     return urlToList(pathname).map(itemPath => getMenuMatches(flatMenuKeys, itemPath).pop());
   };
 

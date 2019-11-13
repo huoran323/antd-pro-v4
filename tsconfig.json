@@ -32,8 +32,7 @@
     "baseUrl": ".", // 用于解析非相对模块名称的基目录
     // 模块名到基于 baseUrl 的路径映射的列表
     "paths": {
-      "@/*": ["src/*"],
-      "@config/*": ["config/*"]
+      "@/*": ["src/*"]
     },
     // "rootDirs": ["/src","/config", "/test", "/mock","../src"], // 根文件夹列表，其组合内容表示项目运行时的结构内容
     // 包含类型声明的文件列表
@@ -55,7 +54,6 @@
   },
   "include": [
     "./src", // 默认是.ts,.tsx 当包含allowJs时也包括.js .jsx
-
     "./typings.d.ts"
   ],
   "exclude": [

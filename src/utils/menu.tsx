@@ -16,7 +16,7 @@ export const getIcon = (icon, className?) => {
   if (typeof icon === 'string' && urlPattern.test(icon)) {
     return <img src={icon} alt="icon" className={className} />;
   }
-  if (typeof icon === 'string') {
+  if (typeof icon === 'string' && icon !== '') {
     return <Icon type={icon} style={{ fontSize: 14, marginRight: 6 }} />;
   }
   return icon;

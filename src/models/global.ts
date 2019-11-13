@@ -51,11 +51,11 @@ const Model: GlobalModel = {
         },
       });
       const params = new URL(window.location.href);
-      console.log('params --', params);
+
       let redirect = params.pathname;
       // yield put(routerRedux.push({ pathname: '/' }));
       if (params.pathname !== '/user/login') {
-        yield put(routerRedux.replace(redirect || '/'));
+        yield put(routerRedux.replace(redirect || '/home'));
       } else {
         yield put(routerRedux.replace('/'));
       }

@@ -2,6 +2,29 @@
 
 @nav-header-height: @layout-header-height;
 
+.logo {
+  position: relative;
+  height: @nav-header-height;
+  line-height: @nav-header-height;
+  padding-left: (@menu-collapsed-width - 32px) / 2;
+  overflow: hidden;
+  background-color: @color-menu;
+
+  transition: all 0.3s;
+
+  img {
+    height: 32px;
+  }
+
+  h1 {
+    display: inline-block;
+    margin-left: 12px;
+    margin-bottom: 0;
+    font-size: 20px;
+    color: #fff;
+  }
+}
+
 .sider {
   position: fixed;
   top: 0;

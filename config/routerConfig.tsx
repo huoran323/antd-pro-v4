@@ -6,10 +6,16 @@
  */
 const appRoutes = [
   {
-    path: '/',
-    name: '引导指南',
-    icon: 'dashboard',
-    component: './driver',
+    path: '/home',
+    name: '首页',
+    icon: 'home',
+    routes: [
+      {
+        path: '/home/driver',
+        name: '引导指南',
+        component: './driver',
+      },
+    ],
   },
   {
     path: '/dashboard',
