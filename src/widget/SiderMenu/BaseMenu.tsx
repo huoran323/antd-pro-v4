@@ -22,14 +22,15 @@ export default class BaseMenu extends PureComponent<any> {
    */
   getSubMenuOrItem = item => {
     /**
-       * some() 方法用于检测数组中的元素是否满足指定条件（函数提供）。
-            some() 方法会依次执行数组的每个元素：
-            如果有一个元素满足条件，则表达式返回true , 剩余的元素不会再执行检测。
-            如果没有满足条件的元素，则返回false。
-       */
+   * some() 方法用于检测数组中的元素是否满足指定条件（函数提供）。
+        some() 方法会依次执行数组的每个元素：
+        如果有一个元素满足条件，则表达式返回true , 剩余的元素不会再执行检测。
+        如果没有满足条件的元素，则返回false。
+   */
     if (item.children && item.children.some(child => child.name)) {
       //遍历是否是SubMenu
       const { name } = item;
+
       return (
         <SubMenu
           title={
@@ -42,7 +43,7 @@ export default class BaseMenu extends PureComponent<any> {
               name
             )
           }
-          key="item.path"
+          key={item.path}
         >
           {this.getNavMenuItems(item.children)}
         </SubMenu>
@@ -99,6 +100,7 @@ export default class BaseMenu extends PureComponent<any> {
       openKeys,
       location: { pathname },
     } = this.props;
+
     let selectedKeys = this.getSelectedMenuKeys(pathname).filter(i => i);
     if (!selectedKeys.length) {
       if (openKeys && openKeys.length) {
@@ -107,8 +109,23 @@ export default class BaseMenu extends PureComponent<any> {
         selectedKeys = ['/'];
       }
     }
+    let props = {};
+    if (openKeys) {
+      props = {
+        openKeys: openKeys.length === 0 ? [...selectedKeys] : openKeys,
+      };
+    }
+
+    const { handleOpenChange } = this.props;
+
     return (
-      <Menu theme="dark" mode="inline" selectedKeys={selectedKeys}>
+      <Menu
+        theme="dark"
+        mode="inline"
+        onOpenChange={handleOpenChange}
+        selectedKeys={selectedKeys}
+        {...props}
+      >
         {this.getNavMenuItems(menuList)}
       </Menu>
     );

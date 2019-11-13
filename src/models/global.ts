@@ -54,7 +54,11 @@ const Model: GlobalModel = {
       console.log('params --', params);
       let redirect = params.pathname;
       // yield put(routerRedux.push({ pathname: '/' }));
-      yield put(routerRedux.replace(redirect || '/'));
+      if (params.pathname !== '/user/login') {
+        yield put(routerRedux.replace(redirect || '/'));
+      } else {
+        yield put(routerRedux.replace('/'));
+      }
     },
     *logout(_, { put }) {
       yield put(routerRedux.push({ pathname: '/user/login' }));

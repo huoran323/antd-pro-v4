@@ -28,6 +28,23 @@ const appRoutes = [
       },
     ],
   },
+  {
+    path: '/list',
+    name: '列表',
+    icon: 'unordered-list',
+    routes: [
+      {
+        path: '/list/basic',
+        name: '基础列表',
+        component: './list/basic',
+      },
+      {
+        path: '/list/complex',
+        name: '复杂列表',
+        component: './list/complex',
+      },
+    ],
+  },
 ];
 
 module.exports = {

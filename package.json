@@ -16,8 +16,8 @@
     "dva": "2.4.1",
     "path-to-regexp": "^3.2.0",
     "qs": "^6.9.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "redux": "^4.0.4",
     "umi-request": "^1.2.7",
     "wetrial": "^2.0.17"

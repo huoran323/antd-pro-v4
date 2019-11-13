@@ -76,18 +76,10 @@ export const getDefaultCollapsedSubMenus = props => {
     menuList,
   } = props;
 
-  console.log('menuList --', menuList);
-  console.log('pathname --', pathname);
-
   const flatMenuKeys = getFlatMenuKeys(menuList);
-  // return urlToList(pathname)
-  //   .map(item => getMenuMatches(flatMenuKeys, item)[0])
-  //   .filter(item => item);
-  const op = urlToList(pathname)
+  return urlToList(pathname)
     .map(item => getMenuMatches(flatMenuKeys, item)[0])
     .filter(item => item);
-
-  return op;
 };
 
 /**
