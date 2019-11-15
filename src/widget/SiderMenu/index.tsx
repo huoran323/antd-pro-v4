@@ -4,6 +4,7 @@ import { ConnectProps } from '@/models/connect';
 import BaseMenu from './BaseMenu';
 import styles from './index.less';
 import { getFlatMenuKeys, getDefaultCollapsedSubMenus } from '@/utils/menu';
+import logo from '@/assets/logo.svg';
 
 const { Sider } = Layout;
 
@@ -51,8 +52,8 @@ class SiderMenuWrapper extends PureComponent<ISiderMenu> {
     return (
       <Sider trigger={null} collapsible width={256} className={styles.sider}>
         <div className={styles.logo}>
-          <img></img>
-          <h1></h1>
+          <img src={logo} alt="logo" />
+          <h1>通用后台管理系统</h1>
         </div>
         <BaseMenu
           {...this.props}

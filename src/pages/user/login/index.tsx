@@ -1,25 +1,16 @@
 import React, { Component } from 'react';
-import { Dispatch } from 'redux';
 import { Form, Input, Icon, Button } from 'antd';
-import { FormComponentProps } from 'antd/es/form';
-import { StateType } from './model';
+import { ConnectProps } from '@/models/connect';
 import { connect } from 'dva';
 import styles from './style.less';
 
-interface LoginProps extends FormComponentProps {
-  dispatch: Dispatch<any>;
-  userLogin: StateType;
+interface LoginProps extends ConnectProps {
+  form: any;
 }
-
-export interface FormDataType {
-  username: string;
-  password: string;
-}
-
-@connect(({ userLogin }: { userLogin: StateType }) => ({
-  userLogin,
+@connect(({ loading }) => ({
+  loading: loading.effects['userLogin/login'],
 }))
-class Login extends Component<LoginProps, any> {
+class Login extends Component<LoginProps> {
   componentDidMount() {}
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,4 +79,4 @@ class Login extends Component<LoginProps, any> {
   }
 }
 
-export default Form.create<LoginProps>()(Login);
+export default Form.create()(Login);

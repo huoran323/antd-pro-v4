@@ -1,25 +1,35 @@
 import React, { PureComponent } from 'react';
-import { Dispatch } from 'redux';
 import { connect } from 'dva';
-import { ConnectProps } from '@/models/connect';
-import { GlobalModelState } from '@/models/global';
-import { Layout, BackTop } from 'antd';
+import { ConnectProps, ConnectState } from '@/models/connect';
+import { Layout } from 'antd';
 import { SiderMenu, GlobalHeader } from '@/widget';
 
 export interface BasicLayoutProps extends ConnectProps {
+  userInfo: any;
   menuList: any[];
   collapsed?: boolean;
   breadcrumbNameMap: any[];
 }
 
-@connect(({ global }: { global: GlobalModelState }) => ({
+@connect(({ global, userLogin }: ConnectState) => ({
   ...global,
+  userInfo: userLogin.userInfo,
 }))
 class BasicLayout extends PureComponent<BasicLayoutProps> {
   componentDidMount() {
-    const { dispatch } = this.props;
+    console.log('userinfo --', this.props);
+    const { dispatch, userInfo } = this.props;
+    const { user_type } = userInfo;
+
+    let username = localStorage.getItem('username');
+    console.log('username -', username);
+    // const userInfo = yield call(getUserInfo, { username: username });
+
     dispatch({
       type: 'global/getMenu',
+      payload: {
+        user_type: user_type,
+      },
     });
   }
   render() {

@@ -1,24 +1,19 @@
-import { Reducer, AnyAction } from 'redux';
-import { EffectsCommandMap } from 'dva';
+import { Reducer } from 'redux';
 import { routerRedux } from 'dva/router';
-import { getRedirect } from '@/utils';
+import { Effect } from '@/models/connect';
+// import { getRedirect } from '@/utils';
 import { mergeMenuList } from '@/utils/menu';
 import { fetchMenus } from '@/services/global';
 
-export interface GlobalModelState {
+export interface IGlobalModelState {
   collapsed: boolean;
   menuList: any[];
   breadcrumbNameMap: any[];
 }
 
-export type Effect = (
-  action: AnyAction,
-  effects: EffectsCommandMap & { select: <T>(func: (state: GlobalModelState) => T) => T },
-) => void;
-
-export interface GlobalModel {
+export interface IGlobalModel {
   namespace: string;
-  state: GlobalModelState;
+  state: IGlobalModelState;
   effects: {
     getMenu: Effect;
     logout: Effect;
@@ -29,7 +24,7 @@ export interface GlobalModel {
   };
 }
 
-const Model: GlobalModel = {
+const GlobalModel: IGlobalModel = {
   namespace: 'global',
   state: {
     collapsed: false,
@@ -55,7 +50,7 @@ const Model: GlobalModel = {
       let redirect = params.pathname;
       // yield put(routerRedux.push({ pathname: '/' }));
       if (params.pathname !== '/user/login') {
-        yield put(routerRedux.replace(redirect || '/home'));
+        yield put(routerRedux.replace(redirect || '/home/driver'));
       } else {
         yield put(routerRedux.replace('/'));
       }
@@ -74,4 +69,4 @@ const Model: GlobalModel = {
   },
 };
 
-export default Model;
+export default GlobalModel;

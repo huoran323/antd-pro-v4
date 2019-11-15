@@ -1,5 +1,9 @@
 import request from '@/utils/request';
-import { FormDataType } from './index';
+
+interface FormDataType {
+  username: string;
+  password: string;
+}
 
 interface UserInfoParam {
   username: string;
