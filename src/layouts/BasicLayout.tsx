@@ -17,30 +17,27 @@ export interface BasicLayoutProps extends ConnectProps {
 }))
 class BasicLayout extends PureComponent<BasicLayoutProps> {
   componentDidMount() {
-    console.log('userinfo --', this.props);
-    const { dispatch, userInfo } = this.props;
-    const { user_type } = userInfo;
+    const { dispatch } = this.props;
 
     let username = localStorage.getItem('username');
-    console.log('username -', username);
-    // const userInfo = yield call(getUserInfo, { username: username });
 
+    // 获取用户信息
     dispatch({
-      type: 'global/getMenu',
+      type: 'userLogin/getUserInfo',
       payload: {
-        user_type: user_type,
+        username: username,
       },
     });
   }
   render() {
-    const { location, menuList } = this.props;
+    const { location, menuList, userInfo } = this.props;
 
     return (
       <>
         <Layout style={{ minHeight: '100vh', paddingLeft: '256px' }}>
           <SiderMenu menuList={menuList} location={location} />
           <Layout>
-            <GlobalHeader></GlobalHeader>
+            <GlobalHeader userInfo={userInfo}></GlobalHeader>
           </Layout>
         </Layout>
       </>

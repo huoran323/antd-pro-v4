@@ -30,12 +30,12 @@ const LoginModel: ModelType = {
       // 存储用户名
       localStorage.setItem('username', username);
       // 获取用户信息
-      yield put({ type: 'getUserInfo', payload: username });
+      yield put({ type: 'getUserInfo', payload: { username: username } });
     },
     // 获取用户信息
     *getUserInfo({ payload }, { call, put }) {
       const userInfo = yield call(getUserInfo, {
-        username: payload,
+        username: payload.username,
       });
 
       yield put({ type: 'saveInfo', payload: userInfo });

@@ -11,7 +11,7 @@ export interface IAccountProps extends ConnectProps {
 }
 
 const Account: React.FC<IAccountProps> = props => {
-  const { dispatch } = props;
+  const { dispatch, userInfo } = props;
 
   const onMenuClick = ({ key }) => {
     if (key === 'logout') {
@@ -36,8 +36,8 @@ const Account: React.FC<IAccountProps> = props => {
   return (
     <HeaderDropdown overlay={menu}>
       <span className={`${styles.action} ${styles.account}`}>
-        <Avatar className={styles.avatar}></Avatar>
-        <span className={styles.name}>测试账户</span>
+        <Avatar className={styles.avatar} src={userInfo.avatar}></Avatar>
+        <span className={styles.name}>{userInfo.name}</span>
       </span>
     </HeaderDropdown>
   );
