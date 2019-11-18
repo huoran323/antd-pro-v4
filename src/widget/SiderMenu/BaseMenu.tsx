@@ -121,8 +121,10 @@ export default class BaseMenu extends PureComponent<any> {
 
     return (
       <Menu
+        key="Menu"
         theme="dark"
         mode="inline"
+        inlineIndent={24}
         onOpenChange={handleOpenChange}
         selectedKeys={selectedKeys}
         {...props}

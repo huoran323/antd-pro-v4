@@ -29,15 +29,32 @@ class BasicLayout extends PureComponent<BasicLayoutProps> {
       },
     });
   }
+
+  // 切换collapsed， collapsed为从GlobalHeader中传递过来的
+  handleMenuCollapse = collapsed => {
+    const { dispatch } = this.props;
+
+    dispatch({
+      type: 'global/changeCollapsed',
+      collapsed,
+    });
+  };
+
   render() {
-    const { location, menuList, userInfo } = this.props;
+    const { children, location, menuList, userInfo, collapsed } = this.props;
+    const layoutStyle = { paddingLeft: collapsed ? '80px' : '256px' };
 
     return (
       <>
-        <Layout style={{ minHeight: '100vh', paddingLeft: '256px' }}>
-          <SiderMenu menuList={menuList} location={location} />
-          <Layout>
-            <GlobalHeader userInfo={userInfo}></GlobalHeader>
+        <Layout style={{ minHeight: '100vh' }}>
+          <SiderMenu menuList={menuList} location={location} collapsed={collapsed} />
+          <Layout style={{ minHeight: '100vh', ...layoutStyle }}>
+            <GlobalHeader
+              userInfo={userInfo}
+              collapsed={collapsed}
+              onCollapse={this.handleMenuCollapse}
+            ></GlobalHeader>
+            <div>{children}</div>
           </Layout>
         </Layout>
       </>

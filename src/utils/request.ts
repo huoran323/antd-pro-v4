@@ -1,5 +1,6 @@
 import { extend } from 'umi-request';
 import { notification } from 'antd';
+import router from 'umi/router';
 import Qs from 'qs';
 
 const codeMessage = {
@@ -74,6 +75,7 @@ request.interceptors.request.use((url: string, options: any) => {
 // response拦截器, 处理response
 request.interceptors.response.use(async (response, options) => {
   const res = await response.clone().json();
+
   const { token, code, data } = res;
   if (token) {
     localStorage.setItem('Access-Token', token);
@@ -81,6 +83,9 @@ request.interceptors.response.use(async (response, options) => {
   if (code === 200) {
     // 请求成功
     return data;
+  } else if (code === 401) {
+    // 没有权限
+    router.push('/user/login');
   }
 
   return response;

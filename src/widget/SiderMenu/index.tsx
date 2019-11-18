@@ -10,6 +10,8 @@ const { Sider } = Layout;
 
 export interface ISiderMenu extends ConnectProps {
   menuList: any[];
+  collapsed?: boolean;
+  onCollapse?: (collapsed) => void;
 }
 
 class SiderMenuWrapper extends PureComponent<ISiderMenu> {
@@ -45,12 +47,20 @@ class SiderMenuWrapper extends PureComponent<ISiderMenu> {
   };
   render() {
     const { openKeys } = this.state;
-    const { menuList } = this.props;
+    const { collapsed, onCollapse, menuList } = this.props;
 
     const flatMenuKeys = getFlatMenuKeys(menuList);
-    const defaultProps = { openKeys };
+    const defaultProps = collapsed ? {} : { openKeys };
     return (
-      <Sider trigger={null} collapsible width={256} className={styles.sider}>
+      <Sider
+        trigger={null}
+        collapsible={true}
+        collapsed={collapsed}
+        onCollapse={onCollapse}
+        breakpoint="lg"
+        width={256}
+        className={styles.sider}
+      >
         <div className={styles.logo}>
           <img src={logo} alt="logo" />
           <h1>通用后台管理系统</h1>
@@ -59,6 +69,8 @@ class SiderMenuWrapper extends PureComponent<ISiderMenu> {
           {...this.props}
           flatMenuKeys={flatMenuKeys}
           handleOpenChange={this.handleOpenChange}
+          onOpenChange={this.handleOpenChange}
+          style={{ padding: '12px 0', width: '100%' }}
           {...defaultProps}
         ></BaseMenu>
       </Sider>
