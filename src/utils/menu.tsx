@@ -83,6 +83,36 @@ export const getDefaultCollapsedSubMenus = props => {
 };
 
 /**
+ * 获取面包屑映射
+ * @param {Object} menuList 菜单配置
+ *
+ * [{ path: '/', name: '首页' }, { path: '/customer', name: '客户管理', children: [{ path: '/all', name: '所有客户' }] }]
+ *
+ * =>
+ *
+ * {
+ *  '/': { path: '/', name: '首页' },
+ *  '/all': { path: '/all', name: '所有客户' },
+ *  '/customer': { path: '/customer', name: '客户管理', children: [{ path: '/all', name: '所有客户' }]
+ * }
+ */
+export const getBreadcrumbNameMap = menuList => {
+  const routerMap = {};
+
+  const flattenMenuData = data => {
+    data.forEach(menuItem => {
+      if (menuItem.children) {
+        flattenMenuData(menuItem.children);
+      }
+      // Reduce memory usage
+      routerMap[menuItem.path] = menuItem;
+    });
+  };
+  flattenMenuData(menuList);
+  return routerMap;
+};
+
+/**
  * 合并路由配置
  */
 export const mergeMenuList = menuList => {

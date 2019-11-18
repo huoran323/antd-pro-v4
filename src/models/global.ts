@@ -2,8 +2,9 @@ import { Reducer } from 'redux';
 import { routerRedux } from 'dva/router';
 import { Effect } from '@/models/connect';
 // import { getRedirect } from '@/utils';
-import { mergeMenuList } from '@/utils/menu';
+import { mergeMenuList, getBreadcrumbNameMap } from '@/utils/menu';
 import { fetchMenus } from '@/services/global';
+const routerConfig = require('../../config/routerConfig');
 
 export interface IGlobalModelState {
   collapsed: boolean;
@@ -37,12 +38,13 @@ const GlobalModel: IGlobalModel = {
       const data = yield call(fetchMenus, payload);
 
       const menuList = mergeMenuList(data);
+      const breadcrumbNameMap = getBreadcrumbNameMap([...menuList, ...routerConfig.appRoutes]);
 
       yield put({
         type: 'updateState',
         payload: {
           menuList,
-          // breadcrumbNameMap,
+          breadcrumbNameMap,
         },
       });
       const params = new URL(window.location.href);

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { ConnectProps, ConnectState } from '@/models/connect';
 import { Layout } from 'antd';
-import { SiderMenu, GlobalHeader } from '@/widget';
+import { SiderMenu, GlobalHeader, TabsNav } from '@/widget';
 
 export interface BasicLayoutProps extends ConnectProps {
   userInfo: any;
@@ -41,7 +41,7 @@ class BasicLayout extends PureComponent<BasicLayoutProps> {
   };
 
   render() {
-    const { children, location, menuList, userInfo, collapsed } = this.props;
+    const { children, location, menuList, userInfo, collapsed, ...restProps } = this.props;
     const layoutStyle = { paddingLeft: collapsed ? '80px' : '256px' };
 
     return (
@@ -54,7 +54,7 @@ class BasicLayout extends PureComponent<BasicLayoutProps> {
               collapsed={collapsed}
               onCollapse={this.handleMenuCollapse}
             ></GlobalHeader>
-            <div>{children}</div>
+            <TabsNav children={children} {...restProps}></TabsNav>
           </Layout>
         </Layout>
       </>

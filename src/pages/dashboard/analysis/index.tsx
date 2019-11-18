@@ -4,7 +4,7 @@ interface AnalysisProps {}
 
 interface AnalysisState {}
 
-class Analysis extends Component<AnalysisState, AnalysisProps> {
+class Analysis extends Component<AnalysisProps, AnalysisState> {
   render() {
     return <div>Analysis</div>;
   }

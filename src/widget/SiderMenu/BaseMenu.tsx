@@ -117,7 +117,7 @@ export default class BaseMenu extends PureComponent<any> {
       };
     }
 
-    const { handleOpenChange } = this.props;
+    const { handleOpenChange, style } = this.props;
 
     return (
       <Menu
@@ -127,6 +127,7 @@ export default class BaseMenu extends PureComponent<any> {
         inlineIndent={24}
         onOpenChange={handleOpenChange}
         selectedKeys={selectedKeys}
+        style={style}
         {...props}
       >
         {this.getNavMenuItems(menuList)}
