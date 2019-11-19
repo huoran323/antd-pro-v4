@@ -6,6 +6,8 @@ import { Icon } from 'antd';
 import Account from './Account';
 import styles from './index.less';
 
+import Breadcrumb from '../Breadcrumb';
+
 interface IGlobalProps extends ConnectProps {
   userInfo: any;
   collapsed?: boolean;
@@ -27,7 +29,7 @@ export default class GlobalHeader extends PureComponent<IGlobalProps> {
   };
 
   render() {
-    const { userInfo, collapsed } = this.props;
+    const { userInfo, collapsed, location, ...restProps } = this.props;
     return (
       <div className={classNames(styles.header)}>
         <div className={classNames('row-center', styles.operate)}>
@@ -35,6 +37,8 @@ export default class GlobalHeader extends PureComponent<IGlobalProps> {
             <Icon type={collapsed ? 'menu-unfold' : 'menu-fold'}></Icon>
           </span>
         </div>
+        <Breadcrumb showIcon={true} location={location} {...restProps} />
+
         <div className={styles.content}>
           <Account userInfo={userInfo}></Account>
         </div>

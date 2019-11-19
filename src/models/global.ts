@@ -54,7 +54,7 @@ const GlobalModel: IGlobalModel = {
       if (params.pathname !== '/user/login') {
         yield put(routerRedux.replace(redirect || '/home/driver'));
       } else {
-        yield put(routerRedux.replace('/'));
+        yield put(routerRedux.replace('/home/driver'));
       }
     },
     *logout(_, { put }) {

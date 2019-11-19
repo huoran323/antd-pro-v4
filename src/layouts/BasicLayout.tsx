@@ -52,9 +52,11 @@ class BasicLayout extends PureComponent<BasicLayoutProps> {
             <GlobalHeader
               userInfo={userInfo}
               collapsed={collapsed}
+              location={location}
               onCollapse={this.handleMenuCollapse}
+              {...restProps}
             ></GlobalHeader>
-            <TabsNav children={children} {...restProps}></TabsNav>
+            <TabsNav children={children} location={location} {...restProps}></TabsNav>
           </Layout>
         </Layout>
       </>
