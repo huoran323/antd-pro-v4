@@ -4,6 +4,7 @@ import { ConnectProps } from '@/models/connect';
 import Debounce from 'lodash-decorators/debounce';
 import { Icon } from 'antd';
 import Account from './Account';
+import SelectLang from './SelectLang';
 import styles from './index.less';
 
 import Breadcrumb from '../Breadcrumb';
@@ -41,6 +42,7 @@ export default class GlobalHeader extends PureComponent<IGlobalProps> {
 
         <div className={styles.content}>
           <Account userInfo={userInfo}></Account>
+          <SelectLang className={styles.action} />
         </div>
       </div>
     );

@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Menu } from 'antd';
 import Link from 'umi/link';
 import { getIcon, getMenuMatches, urlToList } from '@/utils/menu';
+import { formatMessage } from 'umi-plugin-react/locale';
 const { SubMenu } = Menu;
 
 export default class BaseMenu extends PureComponent<any> {
@@ -29,7 +30,6 @@ export default class BaseMenu extends PureComponent<any> {
    */
     if (item.children && item.children.some(child => child.name)) {
       //遍历是否是SubMenu
-      const { name } = item;
 
       return (
         <SubMenu
@@ -37,10 +37,10 @@ export default class BaseMenu extends PureComponent<any> {
             item.icon ? (
               <span>
                 {getIcon(item.icon)}
-                <span>{name}</span>
+                <span>{formatMessage({ id: item.path })}</span>
               </span>
             ) : (
-              name
+              formatMessage({ id: item.path })
             )
           }
           key={item.path}
@@ -57,7 +57,6 @@ export default class BaseMenu extends PureComponent<any> {
    * 判断是否是http链接.返回 Link 或 a
    */
   getMenuItemPath = item => {
-    const { name } = item;
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
     const { target } = item;
@@ -66,7 +65,7 @@ export default class BaseMenu extends PureComponent<any> {
       return (
         <a href={itemPath} target={target}>
           {icon}
-          <span>{name}</span>
+          <span>{formatMessage({ id: item.path })}</span>
         </a>
       );
     }
@@ -75,7 +74,7 @@ export default class BaseMenu extends PureComponent<any> {
     return (
       <Link to={itemPath} target={target} replace={itemPath === location.pathname}>
         {icon}
-        <span>{name}</span>
+        <span>{formatMessage({ id: item.path })}</span>
       </Link>
     );
   };

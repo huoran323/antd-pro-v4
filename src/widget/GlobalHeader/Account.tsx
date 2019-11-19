@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'dva';
 import { Menu, Icon, Avatar } from 'antd';
 import { ConnectProps } from '@/models/connect';
+import { formatMessage } from 'umi-plugin-react/locale';
 import HeaderDropdown from './components/HeaderDropdown';
 
 import styles from './index.less';
@@ -23,12 +24,12 @@ const Account: React.FC<IAccountProps> = props => {
     <Menu className={styles.menu} onClick={onMenuClick}>
       <Menu.Item key="userInfo">
         <Icon type="setting" />
-        个人中心
+        {formatMessage({ id: 'globalHeader.account.settings' })}
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="logout">
         <Icon type="logout" />
-        退出登录
+        {formatMessage({ id: 'globalHeader.account.logout' })}
       </Menu.Item>
     </Menu>
   );

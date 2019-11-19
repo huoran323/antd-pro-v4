@@ -5,6 +5,7 @@ import PathToRegexp from 'path-to-regexp';
 import { ConnectProps } from '@/models/connect';
 import { urlToList } from '@/utils/menu';
 import styles from './index.less';
+import { formatMessage } from 'umi-plugin-locale';
 
 export interface IBreadcrumbProps extends ConnectProps {
   breadcrumbNameMap?: any[];
@@ -15,11 +16,9 @@ export interface IBreadcrumbProps extends ConnectProps {
 }
 
 export const renderItemLocal = item => {
-  // if (item.locale) {
-  //   return projectConfig.menu.disableLocal
-  //     ? item.name
-  //     : formatMessage({ id: item.locale, defaultMessage: item.name });
-  // }
+  if (item.path) {
+    return formatMessage({ id: item.path });
+  }
   return item.name;
 };
 
@@ -63,11 +62,13 @@ class CusBreadcrumb extends React.PureComponent<IBreadcrumbProps, any> {
       );
     });
 
+    console.log('extraBreadcrumbItems --', extraBreadcrumbItems);
+
     // Add home breadcrumbs to your head
     extraBreadcrumbItems.unshift(
       <Breadcrumb.Item key="home">
         {showIcon && <Icon type="home" />}
-        <Link to="/home/driver">{home || '首页'}</Link>
+        <Link to="/home/driver">{formatMessage({ id: '/home' })}</Link>
       </Breadcrumb.Item>,
     );
 
